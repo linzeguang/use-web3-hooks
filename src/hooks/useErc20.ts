@@ -92,35 +92,38 @@ export enum ApproveStatus {
   FAILED = 'FAILED' // 授权失败
 }
 
-export const useApprove = (address: Address, spender: Address, amount: bigint) => {
+export const useApprove = (address: Address) => {
   const config = useConfig()
   const { writeContractAsync } = useWriteContract()
   const [status, setStatus] = useState(ApproveStatus.IDLE)
 
   const { allowance, isLoading, refetch } = useAllowance(address)
 
-  const approve = useCallback(async () => {
-    if (isLoading) return
-    if (allowance && allowance >= amount) return
+  const approve = useCallback(
+    async (spender: Address, amount: bigint) => {
+      if (isLoading) return
+      if (allowance && allowance >= amount) return
 
-    try {
-      setStatus(ApproveStatus.PENDING)
-      const tx = await writeContractAsync({
-        abi: erc20Abi,
-        address,
-        functionName: 'approve',
-        args: [spender, amount]
-      })
+      try {
+        setStatus(ApproveStatus.PENDING)
+        const tx = await writeContractAsync({
+          abi: erc20Abi,
+          address,
+          functionName: 'approve',
+          args: [spender, amount]
+        })
 
-      setStatus(ApproveStatus.PROCESSING)
-      await waitForTransactionReceipt(config, { hash: tx })
-      setStatus(ApproveStatus.APPROVED)
-      refetch()
-    } catch (error) {
-      setStatus(ApproveStatus.FAILED)
-      throw error
-    }
-  }, [address, allowance, amount, config, isLoading, refetch, spender, writeContractAsync])
+        setStatus(ApproveStatus.PROCESSING)
+        await waitForTransactionReceipt(config, { hash: tx })
+        setStatus(ApproveStatus.APPROVED)
+        refetch()
+      } catch (error) {
+        setStatus(ApproveStatus.FAILED)
+        throw error
+      }
+    },
+    [address, allowance, config, isLoading, refetch, writeContractAsync]
+  )
 
   useEffect(() => {
     if ([ApproveStatus.APPROVED, ApproveStatus.FAILED].includes(status)) {
