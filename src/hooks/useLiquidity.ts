@@ -5,11 +5,13 @@ import { useCallback } from 'react'
 import { Address } from 'viem'
 import { useAccount, useChainId } from 'wagmi'
 
+import { useSwapContext } from '../providers'
 import { useApprove, useTransaction } from './useErc20'
 
-export const useMint = (token0: Token, token1: Token, nonfungiblePositionManagerAddress: Address) => {
+export const useMint = (token0: Token, token1: Token) => {
   const { address } = useAccount()
   const chainId = useChainId()
+  const { nonfungiblePositionManagerAddress } = useSwapContext()
 
   const { approve: approveToken0, status: approveToken0Status } = useApprove(token0.wrapped.address as Address)
   const { approve: approveToken1, status: approveToken1Status } = useApprove(token1.wrapped.address as Address)

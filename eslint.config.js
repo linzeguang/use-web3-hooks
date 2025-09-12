@@ -30,7 +30,7 @@ export default tseslint.config([
     rules: {
       // === TypeScript ===
       '@typescript-eslint/no-empty-object-type': 'warn',
-      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-explicit-any': 'off',
 
       // === unused-imports ===
       'unused-imports/no-unused-imports': 'error',

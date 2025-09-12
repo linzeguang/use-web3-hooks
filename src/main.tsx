@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { bscTestnet, mainnet } from 'viem/chains'
 
 import App from './App'
-import { WalletProvider } from './providers/WalletProvider'
+import { SwapProvider, WalletProvider } from './providers'
 
 createRoot(document.getElementById('root')!).render(
   <WalletProvider
@@ -16,6 +16,8 @@ createRoot(document.getElementById('root')!).render(
       })
     ]}
   >
-    <App />
+    <SwapProvider nonfungiblePositionManagerAddress={'0x66023AB59C5BA1F41EC5a5D0ec67682425afA242'}>
+      <App />
+    </SwapProvider>
   </WalletProvider>
 )
