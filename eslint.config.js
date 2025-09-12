@@ -38,7 +38,10 @@ export default tseslint.config([
 
       // === import ===
       'simple-import-sort/imports': 'error',
-      'simple-import-sort/exports': 'error'
+      'simple-import-sort/exports': 'error',
+
+      // === react-refresh ===
+      'react-refresh/only-export-components': 'off'
     }
   }
 ])
