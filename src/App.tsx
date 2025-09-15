@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { AAA, BBB } from './constants/tokens'
 import { useWallet } from './hooks/useWallet'
 
 const App: React.FC = () => {
@@ -11,6 +12,14 @@ const App: React.FC = () => {
       <div>chainId: {chainId}</div>
       <div>
         balance: {balance?.balance} {balance?.symbol} <button onClick={fetchBalance}>refresh</button>
+      </div>
+      <div>
+        <button>Token {AAA.symbol}</button>
+        <button>Token {BBB.symbol}</button>
+      </div>
+      <div>
+        <button>Token {AAA.symbol}</button>
+        <button>Token {BBB.symbol}</button>
       </div>
     </div>
   )

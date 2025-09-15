@@ -1,10 +1,10 @@
 import { BigintIsh, Currency, CurrencyAmount, Ether, Percent, Token } from '@uniswap/sdk-core'
-import { abi as NONFUNGIBLE_POSITION_MANAGER_ABI } from '@uniswap/v3-periphery/artifacts/contracts/NonfungiblePositionManager.sol/NonfungiblePositionManager.json'
 import { NonfungiblePositionManager, Position } from '@uniswap/v3-sdk'
 import { useCallback } from 'react'
 import { Address } from 'viem'
 import { useAccount, useChainId } from 'wagmi'
 
+import { NONFUNGIBLE_POSITION_MANAGER_ABI } from '../abis'
 import { useSwapContext } from '../providers'
 import { useApprove, useTransaction } from './useErc20'
 

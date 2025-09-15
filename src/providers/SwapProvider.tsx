@@ -2,6 +2,10 @@ import React, { createContext, PropsWithChildren, useContext } from 'react'
 import { Address } from 'viem'
 
 export interface SwapContextState {
+  poolInitCodeHash: Address
+  factory: Address
+  swapRouter: Address
+  quoter: Address
   nonfungiblePositionManagerAddress: Address
 }
 
