@@ -1,6 +1,20 @@
 {
   "name": "use-web3-hooks",
   "version": "0.0.1-0",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "types": "./dist/index.d.ts",
+  "main": "./dist/use-web3-hooks.umd.cjs",
+  "module": "./dist/use-web3-hooks.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/use-web3-hooks.js",
+      "require": "./dist/use-web3-hooks.umd.cjs"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -48,6 +62,7 @@
     "tsup": "^8.5.0",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.39.1",
-    "vite": "^7.1.2"
+    "vite": "^7.1.2",
+    "vite-plugin-dts": "^4.5.4"
   }
 }
