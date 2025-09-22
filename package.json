@@ -2,14 +2,34 @@
   "name": "use-web3-hooks",
   "private": true,
   "version": "0.0.0",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "type": "module",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:tsup": "tsup",
     "preview": "vite preview",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
-    "format:fix": "prettier --write \"./src/**/*.{ts,tsx,css}\" --cache"
+    "format:fix": "prettier --write \"./src/**/*.{ts,tsx,css}\" --cache",
+    "release": "standard-version",
+    "postrelease": "git push && git push --tags --no-verify",
+    "version-tag:major": "npm run release -- --release-as major",
+    "version-tag:minor": "npm run release -- --release-as minor",
+    "version-tag:patch": "npm run release -- --release-as patch",
+    "version-tag:premajor": "npm run version-tag:major -- --prerelease",
+    "version-tag:preminor": "npm run version-tag:minor -- --prerelease",
+    "version-tag:prepatch": "npm run version-tag:patch -- --prerelease",
+    "version-tag:prerelease": "npm run release -- --prerelease"
   },
   "dependencies": {
     "@reown/appkit": "^1.8.4",
@@ -37,6 +57,8 @@
     "eslint-plugin-unused-imports": "^4.2.0",
     "globals": "^16.3.0",
     "prettier": "^3.6.2",
+    "standard-version": "^9.5.0",
+    "tsup": "^8.5.0",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.39.1",
     "vite": "^7.1.2"
